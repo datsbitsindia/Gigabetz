@@ -1,0 +1,324 @@
+<html>
+
+<head>
+    <title>Gegabetz Application</title>
+    <!-- <script src="/socket.io/socket.io.js"></script> -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 5px;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+    <script>
+        // const socket = io.connect(window.location.href, {
+        //     reconnection: true,
+        //     forceNew: false
+        // });
+        // socket.userId = 111;
+
+        function emitCall(method, obj) {
+            $('#div_response').html('');
+
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                url: "/api/" + method,
+                data: obj,
+                success: function (res) {
+                    $('#div_response').html(JSON.stringify(res));
+                },
+                error: function (msg) {
+                    $('#div_response').html(JSON.stringify(msg));
+                }
+            });
+
+            // socket.emit(method, obj);
+            // socket.on(method, (res) => {
+            //     $('#div_response').html(JSON.stringify(res));
+            //     socket.off(method);
+            // });
+        }
+
+        $(document).ready(function () {
+            // $.get("https://api.b365api.com/v1/bet365/inplay_filter?sport_id=3&token=97205-QBhTyEQKRoffkC", function( data ) {
+            //         console.log(data)
+            //     });
+
+            $.ajaxSetup({
+                crossOrigin: true
+            });
+
+            url = "https://api.b365api.com/v1/bet365/inplay_filter?sport_id=3&token=97205-QBhTyEQKRoffkC";
+            $.getJSON(url, function (data) {
+                console.log(data);
+            });
+
+            // $.ajax({
+            //     type: 'GET',
+            //     url: 'http://api.b365api.com/v1/bet365/inplay_filter',
+            //     dataType: 'jsonp',
+            //     'Content-Type': 'text/json',
+            //     data: { 
+            //         sport_id: 3, 
+            //         token: '97205-QBhTyEQKRoffkC'
+            //     },
+            //     headers: {
+            //         "Access-Control-Allow-Credentials": true,
+            //         "Access-Control-Allow-Origin": "*",
+            //         "Access-Control-Allow-Methods": "GET",
+            //         "Access-Control-Allow-Headers": "Content-Type",
+            //     },
+            //     success: function(jsondata){
+            //         console.log(JSON.stringify(jsondata))
+            //         // $('#div_response').html(JSON.stringify(jsondata));
+            //     },
+            //     error: function (error) {
+            //         //console.log(error);
+            //     },
+            // });
+
+        });
+
+
+    </script>
+    <style>
+        .blink_me {
+            animation: blinker 0.8s linear infinite;
+            font-weight: bolder;
+            color: red;
+        }
+
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        img {
+            height: 80px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Gegabetz Application</h1>
+
+    <div id="div_response"></div>
+
+    <table>
+        <tr>
+            <th>Event Name</th>
+            <th>Event Type</th>
+            <th>Parameter</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td> authenticateUser</td>
+            <th>POST</th>
+            <td> userName, password </td>
+            <td>
+                <input type="text" id="txt_user_2" placeholder="userName">
+                <input type="text" id="txt_password_2" placeholder="password">
+                <button
+                    onclick="emitCall('authenticateUser', { userName: document.getElementById('txt_user_2').value,password: document.getElementById('txt_password_2').value })">Login</button>
+            </td>
+        </tr>
+        <tr>
+            <td> registerUser</td>
+            <th>POST</th>
+            <td> FullName, UserName, Email, PhoneNumber, Password </td>
+            <td>
+                <input type="text" id="txt_FullName" placeholder="FullName">
+                <input type="text" id="txt_UserName" placeholder="UserName">
+                <input type="text" id="txt_Password" placeholder="Password">
+                <input type="text" id="txt_Email" placeholder="Email">
+                <input type="text" id="txt_PhoneNumber" placeholder="PhoneNumber">
+                <button onclick="emitCall('registerUser', { 
+                    FullName: document.getElementById('txt_FullName').value,
+                    UserName: document.getElementById('txt_UserName').value,
+                    Password: document.getElementById('txt_Password').value,
+                    Email: document.getElementById('txt_Email').value,
+                    PhoneNumber: document.getElementById('txt_PhoneNumber').value })">Register</button>
+            </td>
+        </tr>
+        <tr>
+            <td> addAccount</td>
+            <th>POST</th>
+            <td>
+                UserName, Password, FullName, Email, PhoneNumber, RoleID, ExposureLimit, CreditReference, MinimumOdds,
+                MaximumOdds, LoginUserID, TransctionCode
+                <br>
+                ( Comm_Upline_1, Comm_Upline_2, Comm_Upline_3, Comm_Downline_1, Comm_Downline_2, Comm_Downline_3,
+                Comm_Our_1, Comm_Our_2, Comm_Our_3 )
+                <br>
+                ( Part_Upline_1, Part_Upline_2, Part_Upline_3, Part_Downline_1, Part_Downline_2, Part_Downline_3,
+                Part_Our_1, Part_Our_2, Part_Our_3 )
+                <br>
+                ( Bet_Min_1, Bet_Min_2, Bet_Min_3, Bet_Min_4, Bet_Min_5, Bet_Max_1, Bet_Max_2, Bet_Max_3, Bet_Max_4,
+                Bet_Max_5, Bet_Delay_1, Bet_Delay_2, Bet_Delay_3, Bet_Delay_4, Bet_Delay_5,
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td> getAccounts</td>
+            <th>POST</th>
+            <td>
+                LoginUserID
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td> userGeneratePoints</td>
+            <th>POST</th>
+            <td>
+                UserID, Points, LoginUserID, TransctionCode
+            </td>
+            <td>
+                <!-- <button onclick="emitCall('userGeneratePoints', { UserID: 29, Points: 20, LoginUserID: 1, TransctionCode: 1232 })">Click</button> -->
+            </td>
+        </tr>
+        <tr>
+            <td> userDeposit</td>
+            <th>POST</th>
+            <td>
+                Amount, UserID, Remarks, LoginUserID, TransctionCode, LoginRoleID
+                ( FirstName, LastName, Email, PhoneNumber )
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td> userWithdrawRequest</td>
+            <th>POST</th>
+            <td>
+                UserID, Amount, WithdrawType, Remarks, LoginUserID, TransctionCode, LoginRoleID
+                ( AccountName, AccountNumber, BankName, BankIFSCCode )
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td> userMinMaxOdds</td>
+            <th>POST</th>
+            <td>
+                UserID, MinimumOdds, MaximumOdds, TransctionCode, LoginUserID
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td> userExposureLimit</td>
+            <th>POST</th>
+            <td>
+                UserID, ExposureLimit, TransctionCode, LoginUserID
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td> userCreditReference</td>
+            <th>POST</th>
+            <td>
+                UserID, CreditReference, TransctionCode, LoginUserID
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td> resetUserPassword</td>
+            <th>POST</th>
+            <td>
+                UserID, Password, TransctionCode, LoginUserID
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td> userActiveAandBetStatus</td>
+            <th>POST</th>
+            <td>
+                UserID, Active, BetStatus, TransctionCode, LoginUserID
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td> userSportsAccess</td>
+            <th>POST</th>
+            <td>
+                UserID, Cricket, Soccer, Tennis, Casino, TransctionCode, LoginUserID
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td> <a class="blink_me">New</a> usersBets</td>
+            <th>POST</th>
+            <td>
+                SportID, FIID, BetID, ODValue, ODCalcValue, BetAmount, EventName, MarketGroup, LoginUserID
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td> <a class="blink_me">New</a> getUsersBets</td>
+            <th>POST</th>
+            <td>
+                LoginUserID
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td> <a class="blink_me">New</a> getUsersBalance</td>
+            <th>POST</th>
+            <td>
+                LoginUserID
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td> <a class="blink_me">New</a> getWithdrawalRequest</td>
+            <th>POST</th>
+            <td>
+                LoginUserID
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td> <a class="blink_me">New</a> changePassword</td>
+            <th>POST</th>
+            <td>
+                Password, LoginUserID
+            </td>
+            <td>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

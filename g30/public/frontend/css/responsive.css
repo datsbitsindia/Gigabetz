@@ -1,0 +1,61 @@
+/*-------------- Start device screen 1200 --------------*/
+@media screen and (max-width: 1200px) {}
+/*-------------- Start device screen 992 --------------*/
+@media screen and (max-width: 992px) {}
+/*-------------- Start device screen 768 --------------*/
+@media screen and (max-width: 768px) {}
+/*-------------- Start device screen 576 --------------*/
+@media screen and (max-width: 576px) {
+	.top_barnav .navbar .navbar-brand img{
+		max-width: 110px;
+	}
+	.scn_nav.navbar-light .navbar-nav li{
+		width: 100%;
+	}
+	.tb-in-cl .cl-a button, .tb-in-cl .cl-b button{
+		font-size: 11px;
+	}
+	.ch-table .table td a{
+		font-size: 13px;
+	}
+	.ch-table .table thead th{
+		font-size: 12px;
+	}
+	.scn_nav.navbar-light .navbar-nav .nav-link{
+		font-size: 18px;
+	}
+	.tb-in-cl .cl-a button, .tb-in-cl .cl-b button{
+		width: 100%;
+		padding: 4px 5px;
+	}
+	.top_barnav .bg-light{
+		background: #0a0a0a !important;
+	}
+	.top_barnav  .navbar .navbar-toggler{
+		color: #ffffff;
+	}
+	.scn_nav.bg-light .navbar-toggler{
+		color: #ffffff;
+	}
+	.sidebar {
+		position: fixed;
+		top: 87px;
+		bottom: 0;
+		left: 0;
+		z-index: 100;
+		padding: 120px 0 0 0;
+		box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+	}
+	.sidebar-sticky {
+		position: relative;
+		top: 0;
+		height: calc(100vh - 48px);
+		padding-top: .5rem;
+		overflow-x: hidden;
+		overflow-y: auto;
+	}
+	.sidebar-sticky {
+		position: -webkit-sticky;
+		position: sticky;
+	}
+}

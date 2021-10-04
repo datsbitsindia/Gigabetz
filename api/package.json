@@ -1,0 +1,28 @@
+{
+  "name": "gigabetz",
+  "version": "1.0.0",
+  "description": "gigabetz Socket IO Api application",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "gigabetz",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^3.0.2",
+    "body-parser": "^1.18.3",
+    "ejs": "^3.1.6",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "jsonwebtoken": "^8.4.0",
+    "morgan": "^1.9.1",
+    "mssql": "^7.2.1",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "socket.io": "^2.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13"
+  }
+}
